@@ -1,6 +1,6 @@
 ﻿Console.WriteLine("Ingrese el mensaje:");
 string mensajeOriginal = Console.ReadLine();
-Console.WriteLine("Ingrese la permutación");
+Console.WriteLine("Ingrese la permutación (separado por espacios):");
 string permutacion = Console.ReadLine();
 
 int[] arregloPermutacion = ObtenerArregloPermutacion(permutacion);
@@ -30,7 +30,6 @@ for(int i = 0; i < mensajeRevertido.Length; i++) {
     Console.Write(" ");
 }
 
-
 #region Cifrar
 string[][] Agrupar(string mensajeOriginal, int tamanioGrupo) {
     mensajeOriginal = mensajeOriginal.Replace(" ", String.Empty);
@@ -38,10 +37,9 @@ string[][] Agrupar(string mensajeOriginal, int tamanioGrupo) {
     Queue<string> cola = new Queue<string>();
     foreach(var item in mensajeOriginal) cola.Enqueue(item.ToString());
     int cantidadGrupos;
-    if(mensajeOriginal.Length % tamanioGrupo == 0)
-        cantidadGrupos = mensajeOriginal.Length / tamanioGrupo;
-    else
-        cantidadGrupos = (mensajeOriginal.Length / tamanioGrupo) + 1;
+    if(mensajeOriginal.Length % tamanioGrupo == 0) cantidadGrupos = mensajeOriginal.Length / tamanioGrupo;
+    else cantidadGrupos = (mensajeOriginal.Length / tamanioGrupo) + 1;
+
     string[][] grupos = new string[cantidadGrupos][];
     for(int i = 0; i < grupos.Length; i++) grupos[i] = new string[tamanioGrupo];
     for(int i = 0; i < cantidadGrupos; i++) {
@@ -62,8 +60,6 @@ string[][] Permutar(string[][] mensajePorGrupos, int[] arregloPermutacion) {
     }
     return arregloPermutado;
 }
-
-
 #endregion
 
 #region Descifrar
@@ -71,9 +67,8 @@ string[][] RevertirPermutacion(string[][] mensajePermutado, int[] arregloPermuta
     string[][] mensajeRevertido = new string[mensajePermutado.Length][];
     for(int i = 0; i < mensajeRevertido.Length; i++) {
         mensajeRevertido[i] = new string[mensajePermutado[i].Length];
-        for(int j = 0; j < mensajePermutado[i].Length; j++) {
+        for(int j = 0; j < mensajePermutado[i].Length; j++)
             mensajeRevertido[i][arregloPermutacion[j] - 1] = mensajePermutado[i][j];
-        }
     }
     return mensajeRevertido;
 }
@@ -83,9 +78,7 @@ string[][] RevertirPermutacion(string[][] mensajePermutado, int[] arregloPermuta
 int Mayor(int[] arreglo) {
     int mayor = 0;
     for(int i = 0; i < arreglo.Length; i++) {
-        if(arreglo[i] > mayor) {
-            mayor = arreglo[i];
-        }
+        if(arreglo[i] > mayor) mayor = arreglo[i];
     }
     return mayor;
 }
